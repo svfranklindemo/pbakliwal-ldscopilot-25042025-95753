@@ -3,25 +3,37 @@ export default function decorate(block) {
   const form = document.createElement('form');
   form.className = 'mortgage-calculator-form';
 
+  // Create main calculator section
+  const calculatorMain = document.createElement('div');
+  calculatorMain.className = 'calculator-main';
+
   // Purchase Price Input
   const purchasePrice = document.createElement('div');
-  purchasePrice.className = 'form-group';
+  purchasePrice.className = 'form-group purchase-price';
   purchasePrice.innerHTML = `
     <label for="purchase-price">Purchase price</label>
     <div class="slider-container">
       <div class="value-display">$<span id="purchase-price-value">240,000</span></div>
       <input type="range" id="purchase-price" min="25000" max="2500000" value="240000" step="1000">
+      <div class="range-limits">
+        <span>$25,000</span>
+        <span>$2,500,000</span>
+      </div>
     </div>
   `;
 
   // Down Payment Input
   const downPayment = document.createElement('div');
-  downPayment.className = 'form-group';
+  downPayment.className = 'form-group down-payment';
   downPayment.innerHTML = `
     <label for="down-payment">Down payment</label>
     <div class="slider-container">
       <div class="value-display">$<span id="down-payment-value">35,000</span></div>
       <input type="range" id="down-payment" min="0" max="500000" value="35000" step="1000">
+      <div class="range-limits">
+        <span>$0</span>
+        <span>$500,000</span>
+      </div>
     </div>
     <small>5% or more of purchase price</small>
   `;
@@ -66,10 +78,13 @@ export default function decorate(block) {
     <p class="estimate-text">Estimate how much you could be paying monthly for your mortgage.</p>
   `;
 
-  // Append all elements to the form
-  form.appendChild(purchasePrice);
-  form.appendChild(downPayment);
-  form.appendChild(termAndZipRow);
+  // Append elements to calculator main
+  calculatorMain.appendChild(purchasePrice);
+  calculatorMain.appendChild(downPayment);
+  calculatorMain.appendChild(termAndZipRow);
+
+  // Append calculator main and result to form
+  form.appendChild(calculatorMain);
   form.appendChild(result);
 
   // Add event listeners
@@ -86,6 +101,9 @@ export default function decorate(block) {
   // Clear the block and append the form
   block.textContent = '';
   block.appendChild(form);
+
+  // Initial calculation
+  calculateMortgage();
 }
 
 function updateValues(e) {
@@ -95,6 +113,19 @@ function updateValues(e) {
   document.getElementById(`${e.target.id}-value`).textContent = formattedValue;
   updateSliderGradient(e.target);
   calculateMortgage();
+
+  // Update down payment minimum if purchase price changes
+  if (e.target.id === 'purchase-price') {
+    const downPaymentSlider = document.getElementById('down-payment');
+    const minDownPayment = Math.max(0, Math.floor(value * 0.05));
+    downPaymentSlider.min = minDownPayment;
+    if (parseInt(downPaymentSlider.value, 10) < minDownPayment) {
+      downPaymentSlider.value = minDownPayment;
+      document.getElementById('down-payment-value').textContent = 
+        new Intl.NumberFormat('en-US').format(minDownPayment);
+      updateSliderGradient(downPaymentSlider);
+    }
+  }
 }
 
 function updateSliderGradient(slider) {
