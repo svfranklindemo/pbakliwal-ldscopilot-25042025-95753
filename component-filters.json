@@ -38,7 +38,8 @@
         "demo-block",
         "embed",
         "workfront-reference",
-        "article-content-fragment"
+        "article-content-fragment",
+        "mortgage-calculator"
       ]
     },
     {
@@ -58,5 +59,9 @@
       "components": [
         "slide"
       ]
+    },
+    {
+      "id": "mortgage-calculator",
+      "components": []
     }
   ]

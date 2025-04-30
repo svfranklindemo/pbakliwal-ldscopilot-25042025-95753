@@ -344,5 +344,73 @@
         "valueType": "string"
       }
     ]
+  },
+  {
+    "id": "mortgage-calculator",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "number",
+        "name": "defaultPurchasePrice",
+        "value": "240000",
+        "label": "Default Purchase Price"
+      },
+      {
+        "component": "text",
+        "valueType": "number",
+        "name": "defaultDownPayment",
+        "value": "35000",
+        "label": "Default Down Payment"
+      },
+      {
+        "component": "text",
+        "valueType": "number",
+        "name": "interestRate",
+        "value": "6.0",
+        "label": "Interest Rate (%)"
+      },
+      {
+        "component": "select",
+        "name": "defaultTerm",
+        "value": "30",
+        "label": "Default Term",
+        "valueType": "string",
+        "options": [
+          {
+            "name": "30 Year Fixed",
+            "value": "30"
+          },
+          {
+            "name": "15 Year Fixed",
+            "value": "15"
+          },
+          {
+            "name": "10 Year Fixed",
+            "value": "10"
+          }
+        ]
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "defaultZipCode",
+        "value": "94115",
+        "label": "Default ZIP Code"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "applyButtonText",
+        "value": "Apply Now",
+        "label": "Apply Button Text"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "applyButtonLink",
+        "value": "",
+        "label": "Apply Button Link"
+      }
+    ]
   }
 ]

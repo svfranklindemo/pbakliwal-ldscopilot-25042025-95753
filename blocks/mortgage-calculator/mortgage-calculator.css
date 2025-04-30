@@ -1,0 +1,105 @@
+.mortgage-calculator-form {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.form-group {
+  margin-bottom: 2rem;
+}
+
+.form-group label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: #333;
+}
+
+.form-group small {
+  display: block;
+  color: #666;
+  font-size: 0.875rem;
+  margin-top: 0.25rem;
+}
+
+.slider-container {
+  position: relative;
+  margin-top: 1rem;
+}
+
+input[type="range"] {
+  width: 100%;
+  height: 6px;
+  background: #e0e0e0;
+  border-radius: 3px;
+  outline: none;
+  -webkit-appearance: none;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 20px;
+  height: 20px;
+  background: #008CBA;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.value-display {
+  margin-top: 0.5rem;
+  font-weight: 600;
+  color: #333;
+}
+
+select, input[type="text"] {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 1rem;
+  color: #333;
+}
+
+.mortgage-result {
+  background-color: #f8f9fa;
+  padding: 2rem;
+  border-radius: 8px;
+  text-align: center;
+  margin-top: 2rem;
+}
+
+.monthly-payment h2 {
+  font-size: 3rem;
+  color: #333;
+  margin: 0;
+}
+
+.monthly-payment p {
+  color: #666;
+  margin: 0.5rem 0 1.5rem;
+}
+
+.apply-now {
+  background-color: #008CBA;
+  color: white;
+  border: none;
+  padding: 1rem 2rem;
+  border-radius: 4px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.apply-now:hover {
+  background-color: #006d8f;
+}
+
+.estimate-text {
+  color: #666;
+  font-size: 0.875rem;
+  margin-top: 1rem;
+} 
