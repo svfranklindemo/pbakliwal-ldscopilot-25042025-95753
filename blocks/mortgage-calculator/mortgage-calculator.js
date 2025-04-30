@@ -9,8 +9,8 @@ export default function decorate(block) {
   purchasePrice.innerHTML = `
     <label for="purchase-price">Purchase price</label>
     <div class="slider-container">
-      <input type="range" id="purchase-price" min="25000" max="2500000" value="240000" step="1000">
       <div class="value-display">$<span id="purchase-price-value">240,000</span></div>
+      <input type="range" id="purchase-price" min="25000" max="2500000" value="240000" step="1000">
     </div>
   `;
 
@@ -20,11 +20,15 @@ export default function decorate(block) {
   downPayment.innerHTML = `
     <label for="down-payment">Down payment</label>
     <div class="slider-container">
-      <input type="range" id="down-payment" min="0" max="500000" value="35000" step="1000">
       <div class="value-display">$<span id="down-payment-value">35,000</span></div>
+      <input type="range" id="down-payment" min="0" max="500000" value="35000" step="1000">
     </div>
     <small>5% or more of purchase price</small>
   `;
+
+  // Create a row for Mortgage Term and ZIP Code
+  const termAndZipRow = document.createElement('div');
+  termAndZipRow.className = 'form-row';
 
   // Mortgage Term Select
   const mortgageTerm = document.createElement('div');
@@ -43,8 +47,12 @@ export default function decorate(block) {
   zipCode.className = 'form-group';
   zipCode.innerHTML = `
     <label for="zip-code">ZIP code</label>
-    <input type="text" id="zip-code" value="94115" pattern="[0-9]{5}">
+    <input type="text" id="zip-code" value="94115" pattern="[0-9]{5}" maxlength="5">
   `;
+
+  // Add mortgage term and zip code to the row
+  termAndZipRow.appendChild(mortgageTerm);
+  termAndZipRow.appendChild(zipCode);
 
   // Result Section
   const result = document.createElement('div');
@@ -61,16 +69,19 @@ export default function decorate(block) {
   // Append all elements to the form
   form.appendChild(purchasePrice);
   form.appendChild(downPayment);
-  form.appendChild(mortgageTerm);
-  form.appendChild(zipCode);
+  form.appendChild(termAndZipRow);
   form.appendChild(result);
 
   // Add event listeners
   form.querySelectorAll('input[type="range"]').forEach((slider) => {
     slider.addEventListener('input', updateValues);
+    // Initialize the gradient
+    updateSliderGradient(slider);
   });
 
   form.querySelector('.apply-now').addEventListener('click', handleApplyNow);
+  form.querySelector('#mortgage-term').addEventListener('change', calculateMortgage);
+  form.querySelector('#zip-code').addEventListener('input', validateZipCode);
 
   // Clear the block and append the form
   block.textContent = '';
@@ -82,7 +93,18 @@ function updateValues(e) {
   const formattedValue = new Intl.NumberFormat('en-US').format(value);
   
   document.getElementById(`${e.target.id}-value`).textContent = formattedValue;
+  updateSliderGradient(e.target);
   calculateMortgage();
+}
+
+function updateSliderGradient(slider) {
+  const percentage = ((slider.value - slider.min) / (slider.max - slider.min)) * 100;
+  slider.style.background = `linear-gradient(to right, #0891B2 0%, #0891B2 ${percentage}%, #E5E7EB ${percentage}%, #E5E7EB 100%)`;
+}
+
+function validateZipCode(e) {
+  const input = e.target;
+  input.value = input.value.replace(/\D/g, '').slice(0, 5);
 }
 
 function calculateMortgage() {
