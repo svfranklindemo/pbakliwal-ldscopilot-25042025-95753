@@ -296,7 +296,7 @@ export async function uploadAsset() {
         console.log("payload for assets:", updates);
 
         // Send request in no-cors mode
-        const response = await fetch('https://275323-918sangriatortoise-stage.adobeio-static.net/api/v1/web/dx-excshell-1/assets', {
+        const response = await fetch('https://275323-918sangriatortoise-stage.adobeio-static.net/api/v1/web/dx-excshell-1/securFinacialAssets', {
             method: 'POST',
             mode: 'no-cors',
             headers: {
