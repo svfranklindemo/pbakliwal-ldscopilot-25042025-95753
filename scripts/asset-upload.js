@@ -257,7 +257,7 @@ const getPayloadUpdates = async () => {
             aemURL: aemURL,
             images: updates,
             demoId: targetDemo.id,
-            pagePath: "/content/"+targetDemo.id+"/language-masters"+pagePathVar,
+            pagePath: "/content/"+userLdap+"/"+targetDemo.id+"/us/en"+pagePathVar,
             projectId: ids.projectId
         };
     } catch (error) {
